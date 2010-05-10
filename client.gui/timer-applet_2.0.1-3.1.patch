@@ -1,0 +1,381 @@
+diff -Naur timer-applet-2.0.1.save/data/timer-applet.glade timer-applet-2.0.1/data/timer-applet.glade
+--- timer-applet-2.0.1.save/data/timer-applet.glade	2010-05-09 09:43:59.000000000 +0000
++++ timer-applet-2.0.1/data/timer-applet.glade	2010-05-09 10:37:10.000000000 +0000
+@@ -439,6 +439,84 @@
+                 <property name="position">1</property>
+               </packing>
+             </child>
++            <child>
++              <widget class="GtkVBox" id="vbox8">
++                <property name="visible">True</property>
++                <child>
++                  <widget class="GtkCheckButton" id="run_command_on_start_check">
++                    <property name="visible">True</property>
++                    <property name="can_focus">True</property>
++                    <property name="label" translatable="yes">run command on start</property>
++                    <property name="use_underline">True</property>
++                    <property name="response_id">0</property>
++                    <property name="draw_indicator">True</property>
++                  </widget>
++                  <packing>
++                    <property name="expand">False</property>
++                    <property name="fill">False</property>
++                  </packing>
++                </child>
++                <child>
++                  <widget class="GtkAlignment" id="alignment7">
++                    <property name="visible">True</property>
++                    <property name="left_padding">12</property>
++                    <child>
++                      <widget class="GtkEntry" id="run_command_on_start_entry">
++                        <property name="visible">True</property>
++                        <property name="can_focus">True</property>
++                      </widget>
++                    </child>
++                  </widget>
++                  <packing>
++                    <property name="position">1</property>
++                  </packing>
++                </child>
++              </widget>
++              <packing>
++                <property name="expand">False</property>
++                <property name="fill">False</property>
++                <property name="position">2</property>
++              </packing>
++            </child>
++            <child>
++              <widget class="GtkVBox" id="vbox10">
++                <property name="visible">True</property>
++                <child>
++                  <widget class="GtkCheckButton" id="run_command_on_stop_check">
++                    <property name="visible">True</property>
++                    <property name="can_focus">True</property>
++                    <property name="label" translatable="yes">run command on stop</property>
++                    <property name="use_underline">True</property>
++                    <property name="response_id">0</property>
++                    <property name="draw_indicator">True</property>
++                  </widget>
++                  <packing>
++                    <property name="expand">False</property>
++                    <property name="fill">False</property>
++                  </packing>
++                </child>
++                <child>
++                  <widget class="GtkAlignment" id="alignment8">
++                    <property name="visible">True</property>
++                    <property name="left_padding">12</property>
++                    <child>
++                      <widget class="GtkEntry" id="run_command_on_stop_entry">
++                        <property name="visible">True</property>
++                        <property name="can_focus">True</property>
++                      </widget>
++                    </child>
++                  </widget>
++                  <packing>
++                    <property name="position">1</property>
++                  </packing>
++                </child>
++              </widget>
++              <packing>
++                <property name="expand">False</property>
++                <property name="fill">False</property>
++                <property name="position">3</property>
++              </packing>
++            </child>
+           </widget>
+           <packing>
+             <property name="position">1</property>
+diff -Naur timer-applet-2.0.1.save/data/timer-applet.schemas.in timer-applet-2.0.1/data/timer-applet.schemas.in
+--- timer-applet-2.0.1.save/data/timer-applet.schemas.in	2010-05-09 09:43:59.000000000 +0000
++++ timer-applet-2.0.1/data/timer-applet.schemas.in	2010-05-09 11:07:11.000000000 +0000
+@@ -1,6 +1,54 @@
+ <gconfschemafile>
+ 	<schemalist>
+ 		<schema>
++			<key>/schemas/apps/timer-applet/prefs/run_command_on_start</key>
++			<applyto>/apps/timer-applet/prefs/run_command_on_start</applyto>
++			<owner>timer-applet</owner>
++			<type>bool</type>
++			<default>false</default>
++			<locale name="C">
++				<short>run command on start</short>
++				<long>run a command when the timer start a countdown</long>
++			</locale>
++		</schema>
++
++		<schema>
++			<key>/schemas/apps/timer-applet/prefs/run_command_on_start_string</key>
++			<applyto>/apps/timer-applet/prefs/run_command_on_start_string</applyto>
++			<owner>timer-applet</owner>
++			<type>string</type>
++			<default></default>
++			<locale name="C">
++				<short>command to run on start</short>
++				<long>command that will be run when the timer start a countdown</long>
++			</locale>
++		</schema>
++		
++		<schema>
++			<key>/schemas/apps/timer-applet/prefs/run_command_on_stop</key>
++			<applyto>/apps/timer-applet/prefs/run_command_on_stop</applyto>
++			<owner>timer-applet</owner>
++			<type>bool</type>
++			<default>false</default>
++			<locale name="C">
++				<short>run command on stop</short>
++				<long>run a command when the timer finishes a countdown</long>
++			</locale>
++		</schema>
++
++		<schema>
++			<key>/schemas/apps/timer-applet/prefs/run_command_on_stop_string</key>
++			<applyto>/apps/timer-applet/prefs/run_command_on_stop_string</applyto>
++			<owner>timer-applet</owner>
++			<type>string</type>
++			<default></default>
++			<locale name="C">
++				<short>command to run on stop</short>
++				<long>command that will be run when the timer finishes a countdown</long>
++			</locale>
++		</schema>
++		
++		<schema>
+ 			<key>/schemas/apps/timer-applet/prefs/play_notification_sound</key>
+ 			<applyto>/apps/timer-applet/prefs/play_notification_sound</applyto>
+ 			<owner>timer-applet</owner>
+diff -Naur timer-applet-2.0.1.save/debian/changelog timer-applet-2.0.1/debian/changelog
+--- timer-applet-2.0.1.save/debian/changelog	2010-05-09 09:43:59.000000000 +0000
++++ timer-applet-2.0.1/debian/changelog	2010-05-09 10:38:57.000000000 +0000
+@@ -1,3 +1,10 @@
++timer-applet (2.0.1-3.2) unstable; urgency=low
++
++  * Non-maintainer upload.
++  * start/stop events
++
++ -- alexander barakin <alex.barakin@gmail.com>  Sun, 09 May 2010 14:38:38 +0400
++
+ timer-applet (2.0.1-3.1) unstable; urgency=low
+ 
+   * NMU. Rebuild to move files to /usr/share/pyshared. Closes: #490510.
+diff -Naur timer-applet-2.0.1.save/src/timerapplet/controllers/TimerApplet.py timer-applet-2.0.1/src/timerapplet/controllers/TimerApplet.py
+--- timer-applet-2.0.1.save/src/timerapplet/controllers/TimerApplet.py	2010-05-09 09:43:59.000000000 +0000
++++ timer-applet-2.0.1/src/timerapplet/controllers/TimerApplet.py	2010-05-09 20:42:12.000000000 +0000
+@@ -12,6 +12,7 @@
+ from timerapplet import ui
+ from timerapplet import utils
+ from timerapplet import config
++import os
+ 
+ class __GstPlayThread(threading.Thread):
+     def __init__(self, ply):
+@@ -75,6 +76,10 @@
+     widget.set_name('timer-applet-button')
+ 
+ class TimerApplet(object):
++    _RUN_COMMAND_ON_START_KEY = 'run_command_on_start'
++    _RUN_COMMAND_ON_START_STRING_KEY = 'run_command_on_start_string'
++    _RUN_COMMAND_ON_STOP_KEY = 'run_command_on_stop'
++    _RUN_COMMAND_ON_STOP_STRING_KEY = 'run_command_on_stop_string'
+     _SHOW_REMAINING_TIME_KEY = 'show_remaining_time'
+     _PLAY_SOUND_KEY = 'play_notification_sound'
+     _USE_CUSTOM_SOUND_KEY = 'use_custom_notification_sound'
+@@ -158,6 +163,10 @@
+         self._start_timer_dialog.connect('clicked-preset',
+                                          self._on_start_dialog_clicked_preset)
+         
++        self._preferences_dialog.connect('run-command-on-start-changed', self._on_prefs_run_command_on_start_changed)
++        self._preferences_dialog.connect('run-command-on-start-string-changed', self._on_prefs_run_command_on_start_string_changed)
++        self._preferences_dialog.connect('run-command-on-stop-changed', self._on_prefs_run_command_on_stop_changed)
++        self._preferences_dialog.connect('run-command-on-stop-string-changed', self._on_prefs_run_command_on_stop_string_changed)
+         self._preferences_dialog.connect('show-remaining-time-changed', self._on_prefs_show_time_changed)
+         self._preferences_dialog.connect('play-sound-changed', self._on_prefs_play_sound_changed)
+         self._preferences_dialog.connect('use-custom-sound-changed', self._on_prefs_use_custom_sound_changed)
+@@ -166,6 +175,10 @@
+         self._about_dialog.connect('delete-event', gtk.Widget.hide_on_delete)
+         self._about_dialog.connect('response', lambda dialog, response_id: self._about_dialog.hide())
+ 
++        self._gconf.add_notification(TimerApplet._RUN_COMMAND_ON_START_KEY, self._on_gconf_changed)
++        self._gconf.add_notification(TimerApplet._RUN_COMMAND_ON_START_STRING_KEY, self._on_gconf_changed)
++        self._gconf.add_notification(TimerApplet._RUN_COMMAND_ON_STOP_KEY, self._on_gconf_changed)
++        self._gconf.add_notification(TimerApplet._RUN_COMMAND_ON_STOP_STRING_KEY, self._on_gconf_changed)
+         self._gconf.add_notification(TimerApplet._SHOW_REMAINING_TIME_KEY, self._on_gconf_changed)
+         self._gconf.add_notification(TimerApplet._PLAY_SOUND_KEY, self._on_gconf_changed)
+         self._gconf.add_notification(TimerApplet._USE_CUSTOM_SOUND_KEY, self._on_gconf_changed)
+@@ -270,6 +283,14 @@
+             row_iter = self._presets_store.get_model().iter_next(row_iter)
+     
+     def _update_preferences_dialog(self):
++        self._preferences_dialog.props.run_command_on_start = \
++            self._gconf.get_bool(TimerApplet._RUN_COMMAND_ON_START_KEY)
++        self._preferences_dialog.props.run_command_on_start_string = \
++            self._gconf.get_string(TimerApplet._RUN_COMMAND_ON_START_STRING_KEY)
++        self._preferences_dialog.props.run_command_on_stop = \
++            self._gconf.get_bool(TimerApplet._RUN_COMMAND_ON_STOP_KEY)
++        self._preferences_dialog.props.run_command_on_stop_string = \
++            self._gconf.get_string(TimerApplet._RUN_COMMAND_ON_STOP_STRING_KEY)
+         self._preferences_dialog.props.show_remaining_time = \
+             self._gconf.get_bool(TimerApplet._SHOW_REMAINING_TIME_KEY)
+         self._preferences_dialog.props.play_sound = \
+@@ -318,6 +339,18 @@
+     
+     ## PreferencesDialog callbacks ##
+     
++    def _on_prefs_run_command_on_start_changed(self, sender, run_command_on_start):
++        self._gconf.set_bool(TimerApplet._RUN_COMMAND_ON_START_KEY, run_command_on_start)
++        
++    def _on_prefs_run_command_on_start_string_changed(self, sender, run_command_on_start_string):
++        self._gconf.set_string(TimerApplet._RUN_COMMAND_ON_START_STRING_KEY, run_command_on_start_string)
++        
++    def _on_prefs_run_command_on_stop_changed(self, sender, run_command_on_stop):
++        self._gconf.set_bool(TimerApplet._RUN_COMMAND_ON_STOP_KEY, run_command_on_stop)
++        
++    def _on_prefs_run_command_on_stop_string_changed(self, sender, run_command_on_stop_string):
++        self._gconf.set_string(TimerApplet._RUN_COMMAND_ON_STOP_STRING_KEY, run_command_on_stop_string)
++        
+     def _on_prefs_show_time_changed(self, sender, show_time):
+         self._gconf.set_bool(TimerApplet._SHOW_REMAINING_TIME_KEY, show_time)
+         
+@@ -391,6 +424,7 @@
+             self._notifier.begin(summary, message, reminder_message_func)
+             
+             self._start_pulsing_button()
++            self._run_stop_command()
+             self._play_notification_sound()
+             
+             if self._gconf.get_bool('play_beep'):
+@@ -451,6 +485,8 @@
+     def _start_timer_with_settings(self, name, hours, minutes, seconds):
+         if self._timer.get_state() != core.Timer.STATE_IDLE:
+             self._timer.reset()
++        else:
++            self._run_start_command()
+         self._timer.set_duration(utils.hms_to_seconds(hours, minutes, seconds))
+         self._timer.set_name(name)
+         self._timer.start()
+@@ -471,6 +507,22 @@
+         gstplay(sound_path)
+         print 'Done playing sound.'
+     
++    def _run_start_command(self):
++        if not self._gconf.get_bool(TimerApplet._RUN_COMMAND_ON_START_KEY):
++            return
++        command = self._gconf.get_string(TimerApplet._RUN_COMMAND_ON_START_STRING_KEY)
++        if len(command) != 0:
++            print 'running command on start: "%s"' % str(command)
++            os.system(command)
++    
++    def _run_stop_command(self):
++        if not self._gconf.get_bool(TimerApplet._RUN_COMMAND_ON_STOP_KEY):
++            return
++        command = self._gconf.get_string(TimerApplet._RUN_COMMAND_ON_STOP_STRING_KEY)
++        if len(command) != 0:
++            print 'running command on stop: "%s"' % str(command)
++            os.system(command)
++    
+     def _start_pulsing_button(self):
+         self._status_button.start_pulsing()
+         
+diff -Naur timer-applet-2.0.1.save/src/timerapplet/ui/PreferencesDialog.py timer-applet-2.0.1/src/timerapplet/ui/PreferencesDialog.py
+--- timer-applet-2.0.1.save/src/timerapplet/ui/PreferencesDialog.py	2010-05-09 09:43:59.000000000 +0000
++++ timer-applet-2.0.1/src/timerapplet/ui/PreferencesDialog.py	2010-05-10 20:29:54.000000000 +0000
+@@ -5,6 +5,14 @@
+ class PreferencesDialog(gobject.GObject):
+     __gsignals__ = {'show-remaining-time-changed':
+                         (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (gobject.TYPE_BOOLEAN,)),
++                    'run-command-on-start-changed':
++                        (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (gobject.TYPE_BOOLEAN,)),
++                    'run-command-on-start-string-changed':
++                        (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (gobject.TYPE_STRING,)),
++                    'run-command-on-stop-changed':
++                        (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (gobject.TYPE_BOOLEAN,)),
++                    'run-command-on-stop-string-changed':
++                        (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (gobject.TYPE_STRING,)),
+                     'play-sound-changed':
+                         (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (gobject.TYPE_BOOLEAN,)),
+                     'use-custom-sound-changed':
+@@ -15,6 +23,18 @@
+     __gproperties__ = {'show-remaining-time':
+                         (bool, 'Show remaining time', 'Whether to show remaining time when the timer is running',
+                          False, gobject.PARAM_WRITABLE),
++                       'run-command-on-start':
++                        (bool, 'run command on start', 'run a command when the timer start a countdown',
++                         False, gobject.PARAM_WRITABLE),
++                       'run-command-on-start-string':
++                        (str, 'command to run on start', 'command that will be run when the timer start a countdown',
++                         '', gobject.PARAM_WRITABLE),
++                       'run-command-on-stop':
++                        (bool, 'run command on stop', 'run a command when the timer finishes a countdown',
++                         False, gobject.PARAM_WRITABLE),
++                       'run-command-on-stop-string':
++                        (str, 'command to run on stop', 'command that will be run when the timer finishes a countdown',
++                         '', gobject.PARAM_WRITABLE),
+                        'play-sound':
+                         (bool, 'Play notification sound', 'Whether to play notification sound when the timer is finished',
+                          False, gobject.PARAM_WRITABLE),
+@@ -29,6 +49,10 @@
+         gobject.GObject.__init__(self)
+         glade_widgets = glade.XML(glade_file_name, 'preferences_dialog')
+         self._preferences_dialog = glade_widgets.get_widget('preferences_dialog')
++        self._run_command_on_start_check = glade_widgets.get_widget('run_command_on_start_check')
++        self._run_command_on_start_entry = glade_widgets.get_widget('run_command_on_start_entry')
++        self._run_command_on_stop_check = glade_widgets.get_widget('run_command_on_stop_check')
++        self._run_command_on_stop_entry = glade_widgets.get_widget('run_command_on_stop_entry')
+         self._show_time_check = glade_widgets.get_widget('show_time_check')
+         self._play_sound_check = glade_widgets.get_widget('play_sound_check')
+         self._use_default_sound_radio = glade_widgets.get_widget('use_default_sound_radio')
+@@ -36,6 +60,10 @@
+         self._sound_chooser_button = glade_widgets.get_widget('sound_chooser_button')
+         self._play_sound_box = glade_widgets.get_widget('play_sound_box')
+         
++        self._run_command_on_start_check.connect('toggled', self._on_run_command_on_start_check_toggled)
++        self._run_command_on_start_entry.connect('changed', self._on_run_command_on_start_entry_changed)
++        self._run_command_on_stop_check.connect('toggled', self._on_run_command_on_stop_check_toggled)
++        self._run_command_on_stop_entry.connect('changed', self._on_run_command_on_stop_entry_changed)
+         self._show_time_check.connect('toggled', self._on_show_time_check_toggled)
+         self._play_sound_check.connect('toggled', self._on_play_sound_check_toggled)
+         self._use_custom_sound_radio.connect('toggled', self._on_use_custom_sound_radio_toggled)
+@@ -47,6 +75,24 @@
+     def show(self):
+         self._preferences_dialog.present()
+     
++    def _on_run_command_on_start_check_toggled(self, widget):
++        self.emit('run-command-on-start-changed', widget.props.active)
++        
++    def _on_run_command_on_start_entry_changed(self, widget):
++        command = widget.get_text()
++        if command is not None:
++            print 'command on start changed to: %s' % command
++            self.emit('run-command-on-start-string-changed', command)
++        
++    def _on_run_command_on_stop_check_toggled(self, widget):
++        self.emit('run-command-on-stop-changed', widget.props.active)
++        
++    def _on_run_command_on_stop_entry_changed(self, widget):
++        command = widget.get_text()
++        if command is not None:
++            print 'command on stop changed to: %s' % command
++            self.emit('run-command-on-stop-string-changed', command)
++        
+     def _on_show_time_check_toggled(self, widget):
+         self.emit('show-remaining-time-changed', widget.props.active)
+         
+@@ -69,6 +115,18 @@
+     def do_set_property(self, pspec, value):
+         if pspec.name == 'show-remaining-time':
+             self._show_time_check.props.active = value
++        elif pspec.name == 'run-command-on-start':
++            self._run_command_on_start_check.props.active = value
++            #self._run_command_on_start_entry.props.sensitive = value
++        elif pspec.name == 'run-command-on-start-string':
++            if self._run_command_on_start_entry.get_text() != value:
++                self._run_command_on_start_entry.set_text(value)
++        elif pspec.name == 'run-command-on-stop':
++            self._run_command_on_stop_check.props.active = value
++            #self._run_command_on_stop_entry.props.sensitive = value
++        elif pspec.name == 'run-command-on-stop-string':
++            if self._run_command_on_stop_entry.get_text() != value:
++                self._run_command_on_stop_entry.set_text(value)
+         elif pspec.name == 'play-sound':
+             self._play_sound_check.props.active = value
+             self._play_sound_box.props.sensitive = value
