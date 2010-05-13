@@ -7,6 +7,8 @@
 
 # layman -a sunrise
 
+# eix-update
+
 # mkdir /var/lib/layman/sunrise/gnome-extra/timer-applet/files
 
 # cp /путь/к/timer-applet_2.x.patch \
